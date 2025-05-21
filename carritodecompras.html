@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras | Salud y Bienestar</title>
+    <!-- Bootstrap CSS -->  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fuente Poppins -->  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos CSS -->
+    <link rel="stylesheet" href="CSS/styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+        <a class="navbar-brand d-flex align-items-center" href="Saludybienestar.html">
+            <img src="IMAGENES/logo.jpeg" alt="logo">
+            <span>SALUD Y BIENESTAR</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="Saludybienestar.html">Inicio</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorías
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                        <a class="dropdown-item" href="suplementos.html">Suplementos</a>
+                        <a class="dropdown-item" href="Infusiones.html">Infusiones</a>
+                        <a class="dropdown-item" href="Aromaterapia.html">Aromaterapia</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="sobrenosotros.html">Sobre Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link active" href="carritodecompras.html"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Carrito de Compras -->
+    <div class="container my-5" style="max-width: 900px;">
+        <h2 class="mb-4 text-center"><i class="fas fa-shopping-cart"></i> Carrito de Compras</h2>
+        <div class="table-responsive mb-4">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body">
+                    <!-- Los productos se llenan con JS -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Cupones y flete -->
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <label for="coupon" class="form-label">¿Tienes un cupón de descuento?</label>
+                <div class="input-group">
+                    <input type="text" id="coupon" class="form-control" placeholder="Código de cupón">
+                    <button class="btn btn-primary2" id="apply-coupon">Aplicar</button>
+                </div>
+                <div id="coupon-message" class="mt-2"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="shipping" class="form-label">Tipo de envío/flete</label>
+                <select id="shipping" class="form-select">
+                    <option value="0">Selecciona una opción</option>
+                    <option value="8000">Envío estándar ($8.000)</option>
+                    <option value="15000">Envío express ($15.000)</option>
+                    <option value="0">Retiro en tienda (Gratis)</option>
+                </select>
+            </div>
+        </div>
+        <!-- Resumen de compra -->
+        <div class="card p-4 mb-4">
+            <h4>Resumen</h4>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Subtotal
+                    <span id="cart-subtotal">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Descuento
+                    <span id="cart-discount">-$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Costo de envío
+                    <span id="cart-shipping">$0</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center fs-5 fw-bold">
+                    Total a pagar
+                    <span id="cart-total">$0</span>
+                </li>
+            </ul>
+            <button id="btnFinalizarCompra" class="btn btn-success btn-lg w-100">Finalizar compra</button>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- JS personalizado para el carrito -->
+    <script>
+        // ========== VARIABLES Y FUNCIONES DE CARRITO ==========
+        let couponApplied = false;
+        let couponValue = 0;
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Renderizar productos del carrito
+        function renderCart() {
+            const tbody = $('#cart-body');
+            tbody.empty();
+            cartItems.forEach((item, idx) => {
+                const subtotal = item.price * item.quantity;
+                const tr = $(`
+                    <tr data-index="${idx}">
+                        <td>
+                            <img src="IMAGENES/${item.product.toLowerCase().replace(/ /g, '')}.jpg" alt="${item.product}" width="50" class="me-2">
+                            ${item.product}
+                        </td>
+                        <td>$${item.price.toLocaleString()}</td>
+                        <td>
+                            <input type="number" min="1" value="${item.quantity}" class="form-control form-control-sm quantity-input" style="width: 70px;">
+                        </td>
+                        <td class="item-subtotal">$${subtotal.toLocaleString()}</td>
+                        <td><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></td>
+                    </tr>
+                `);
+                tbody.append(tr);
+            });
+            updateCart();
+        }
+
+        // Actualizar totales y resumen
+        function updateCart() {
+            let subtotal = 0;
+            cartItems.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+            // Descuento
+            let discount = couponApplied ? Math.round(subtotal * couponValue) : 0;
+
+            // Flete
+            let shipping = parseInt($('#shipping').val()) || 0;
+
+            // Total
+            let total = subtotal - discount + shipping;
+
+            $('#cart-subtotal').text(`$${subtotal.toLocaleString()}`);
+            $('#cart-discount').text(`-$${discount.toLocaleString()}`);
+            $('#cart-shipping').text(`$${shipping.toLocaleString()}`);
+            $('#cart-total').text(`$${total.toLocaleString()}`);
+        }
+
+        // Guardar carrito en localStorage
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+        }
+
+        // Cambios de cantidad
+        $(document).on('input', '.quantity-input', function () {
+            const idx = $(this).closest('tr').data('index');
+            const newQty = parseInt($(this).val());
+            if (newQty > 0) {
+                cartItems[idx].quantity = newQty;
+                saveCart();
+                renderCart();
+            }
+        });
+
+        // Eliminar producto
+        $(document).on('click', '.remove-item', function () {
+            const idx = $(this).closest('tr').data('index');
+            cartItems.splice(idx, 1);
+            saveCart();
+            renderCart();
+        });
+
+        // Selección de envío
+        $('#shipping').on('change', function () {
+            updateCart();
+        });
+
+        // Aplicar cupón
+        $('#apply-coupon').on('click', function () {
+            const code = $('#coupon').val().trim().toUpperCase();
+            if (code === 'SALUD10') {
+                couponApplied = true;
+                couponValue = 0.10; // 10% de descuento
+                $('#coupon-message').html('<span class="text-success">¡Cupón aplicado! 10% de descuento.</span>');
+            } else if (code !== '') {
+                couponApplied = false;
+                couponValue = 0;
+                $('#coupon-message').html('<span class="text-danger">Cupón inválido.</span>');
+            }
+            updateCart();
+        });
+
+        // Inicialización
+        $(document).ready(function () {
+            renderCart();
+            $('#shipping').val("0"); // Valor por defecto
+        });
+
+        //Finalizar compra
+        document.getElementById('btnFinalizarCompra').addEventListener('click', function() {
+            window.location.href = 'finalizarcompra.html'; 
+        });
+    </script>
+</body>
+</html>

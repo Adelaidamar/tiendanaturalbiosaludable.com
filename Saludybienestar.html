@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Virtual de Productos Naturales y de Salud</title>
+
+    <!-- Bootstrap CSS -->  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">  
+    
+    <!-- Fuente Poppins -->  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">  
+
+    <!-- Hoja de estilos CSS -->
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <!-- ... otras etiquetas head ... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    
+</head>
+
+ <body>  
+
+    <!-- Modal -->
+<div class="modal fade" id="Micarrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Mi pedido</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <span class="badge"></span>
+            <ul id="cart-items" class="list-group"></ul>
+            <div id="cart-total"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary2">Enviar pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Navbar con Carrito de Compras y Menú -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-purple">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="IMAGENES/logo.jpeg" alt="logo">
+        <span>SALUD Y BIENESTAR</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="Saludybienestar.html">Inicio</a></li>
+
+            <!-- Menú desplegable de categorías -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categorías
+                </a>
+                <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                    <a class="dropdown-item" href="suplementos.html">Suplementos</a>
+                    <a class="dropdown-item" href="Infusiones.html">Infusiones</a>
+                    <a class="dropdown-item" href="Aromaterapia.html">Aromaterapia</a>
+                </div>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="sobrenosotros.html">Sobre Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+
+            <!-- Carrito de compras -->
+            <li class="nav-item">
+                <a class="nav-link" href="carritodecompras.html" id="cart" <i class="fas fa-shopping-cart"></i> Carrito <span class="badge badge-light">0</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- Carousel de Imágenes -->   
+  <div class="carousel-container">  
+    <h5 class="carousel-title">Cuida tu vida con salud y bienestar</h5>   
+
+</div> 
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="IMAGENES/carouselaceitelavanda.jpeg" class="d-block w-100" alt="Aceitedelavanda">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Aceite de lavanda</h5>
+          <p>Ideal para relajarse y dormir bien.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="IMAGENES/carouselomega.jpeg" class="d-block w-100" alt="Omega3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Omega 3</h5>
+          <p>Fortalece el sistema inmunológico.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="IMAGENES/carouselteverde.jpeg" class="d-block w-100" alt="Téverde">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Té verde</h5>
+          <p>Ideal para desintoxicar el organismo.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+
+<!-- Modal para Ver Video -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">Ver Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="videoIframe" width="100%" height="400" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products destacados -->  
+<div id="products" class="container mb-5">  
+    <h2 class="text-center mb-4">Productos Destacados</h2>  
+    <div class="row">   
+
+        <!-- Producto 1 -->  
+        <div class="col-md-3 mb-4">  
+            <div class="card product-card">  
+                <img src="IMAGENES/vitaminac.jpg" class="card-img-top" alt="vitaminac">  
+                <div class="card-body">  
+                    <h5 class="card-title">Vitamina C</h5>  
+                    <p class="card-text">Ideal para cuidar tu piel con antioxidantes.</p>  
+                    <p><strong>Precio: $50.000</strong></p>    
+                <!-- Botón Añadir al Carrito -->
+                <button class="btn btn-primary2 add-to-cart" data-product="Ritual de Vitamina C" data-price="50000">Añadir al Carrito</button>
+                <!-- Botón Ver Video -->
+                <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/dwUXCEP_-kw">Ver Video</button>
+            </div>  
+            </div>  
+        </div>  
+        
+        <!-- Producto 2 -->  
+        <div class="col-md-3 mb-4">  
+            <div class="card product-card">  
+                <img src="IMAGENES/teverde.jpg" class="card-img-top" alt="teverde">  
+                <div class="card-body">  
+                    <h5 class="card-title">Te verde</h5>  
+                    <p class="card-text">Ideal para desintoxicar el organismo.</p>  
+                    <p><strong>Precio: $60.000</strong></p>  
+                <!-- Botón Añadir al Carrito -->
+                <button class="btn btn-primary2 add-to-cart" data-product="Teverde" data-price="60000">Añadir al Carrito</button>
+                <!-- Botón Ver Video --> 
+                <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/qIerADFvKuA">Ver Video</button>
+            </div>  
+            </div>  
+        </div>  
+
+        <!-- Producto 3 -->  
+        <div class="col-md-3 mb-4">  
+            <div class="card product-card">  
+                <img src="IMAGENES/aceitelavanda.jpg" class="card-img-top" alt="aceitelavanda">  
+                <div class="card-body">  
+                    <h5 class="card-title">Aceite de lavanda</h5>  
+                    <p class="card-text">Ideal para relajarse y dormir bien.</p>  
+                    <p><strong>Precio: $40.000</strong></p>  
+                <!-- Botón Añadir al Carrito -->
+                    <button class="btn btn-primary2 add-to-cart" data-product="aceitelavanda" data-price="40000">Añadir al Carrito</button>  
+            <!-- Botón Ver Video -->
+            <button class="btn btn-secondary view-video"  data-video-url="https://www.youtube.com/embed/2o4-HfSpwpQ">Ver Video</button>
+                </div>  
+        </div>  
+    </div>
+
+        <!-- Producto 4 -->  
+        <div class="col-md-3 mb-4">  
+            <div class="card product-card">  
+                <img src="IMAGENES/omega3.jpg" class="card-img-top" alt="omega3">  
+                <div class="card-body">  
+                    <h5 class="card-title">Omega 3</h5>  
+                    <p class="card-text">Fortalece el sistema inmunológico.</p>  
+                    <p><strong>Precio: $110.000</strong></p>     
+                <!-- Botón Añadir al Carrito -->
+                <button class="btn btn-primary2 add-to-cart" data-product="omega3" data-price="110000">Añadir al Carrito</button> 
+                <!-- Botón Ver Video --> 
+                <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/UT5BZedOOpk">Ver Video</button>
+            </div>  
+            </div>  
+        </div> 
+     
+
+        <!-- Producto 5 -->  
+        <div class="col-md-3 mb-4">  
+            <div class="card product-card">  
+                <img src="IMAGENES/mascaraantiquiebre.jpg" class="card-img-top" alt="mascaraantiquiebre">  
+                <div class="card-body">  
+                    <h5 class="card-title">Mascara antiquiebre anticaida</h5>  
+                    <p class="card-text">Fortalece y mantiene el folículo capilar.</p>  
+                    <p><strong>Precio: $62.000</strong></p>      
+                <!-- Botón Añadir al Carrito -->
+                <button class="btn btn-primary2 add-to-cart" data-product="aceitelavanda" data-price="62000">Añadir al Carrito</button> 
+                <!-- Botón Ver Video --> 
+                <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/QA1WsbqIS0c">Ver Video</button>
+            </div>  
+            </div>  
+        </div> 
+        
+        <!-- Producto 6 -->  
+        <div class="col-md-3 mb-4">  
+        <div class="card product-card">  
+        <img src="IMAGENES/coloniateverde.jpg" class="card-img-top" alt="coloniateverde">  
+        <div class="card-body">  
+            <h5 class="card-title">Colonia te verde</h5>  
+            <p class="card-text">Promueve sensaciones de motivación, dinamismo y eficiencia.</p>  
+            <p><strong>Precio: $41.000</strong></p>      
+        <!-- Botón Añadir al Carrito -->
+        <button class="btn btn-primary2 add-to-cart" data-product="coloniateverde" data-price="41000">Añadir al Carrito</button> 
+        <!-- Botón Ver Video --> 
+        <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/BZf4M7ufnOc">Ver Video</button>
+    </div>  
+    </div>  
+ </div>
+
+        <!-- Producto 7 -->  
+        <div class="col-md-3 mb-4">  
+        <div class="card product-card">  
+        <img src="IMAGENES/protectorsolar.jpg" class="card-img-top" alt="protectorsolar">  
+        <div class="card-body">  
+            <h5 class="card-title">Protector solar 140 gr.</h5>  
+            <p class="card-text">Alta protección contra rayos UVA/UVB</p>  
+            <p><strong>Precio: $90.000</strong></p>      
+        <!-- Botón Añadir al Carrito -->
+        <button class="btn btn-primary2 add-to-cart" data-product="protectorsolar" data-price="90000">Añadir al Carrito</button> 
+        <!-- Botón Ver Video --> 
+        <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/ZZrOK9XTdxEhAH7v">Ver Video</button>
+    </div>  
+    </div>  
+</div>
+
+<!-- Producto 8 -->  
+<div class="col-md-3 mb-4">  
+    <div class="card product-card">  
+        <img src="IMAGENES/aceitedemasajesmaracuyá.jpg" class="card-img-top" alt="aceitedemasajesmaracuyá">  
+        <div class="card-body">  
+            <h5 class="card-title">Aceite de masajes maracuyá.</h5>  
+            <p class="card-text">Protege, hidrata y realza el tono natural de la piel.</p>  
+            <p><strong>Precio: $70.000</strong></p>      
+        <!-- Botón Añadir al Carrito -->
+        <button class="btn btn-primary2 add-to-cart" data-product="aceitedemasajesmaracuyá" data-price="70000">Añadir al Carrito</button> 
+        <!-- Botón Ver Video --> 
+        <button class="btn btn-secondary view-video" data-video-url="https://www.youtube.com/embed/SPmZy8vz3kI">Ver Video</button>
+    </div>  
+</div>  
+</div>
+</div>
+</div>
+  
+
+
+<!-- Sección de Testimonios -->
+<div id="testimonials" class="container mb-5">
+    <h2 class="text-center mb-4">Testimonios de Clientes:</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="testimonial">
+                <div class="testimonial-container">
+                    <div class="testimonial-avatar">
+                        <img src="IMAGENES/Ana Maria.png" alt="Avatar Ana María">
+                    </div>
+                    <div>
+                        <p>"¡Me encantan los productos! He notado una gran mejora en mi salud."</p>
+                        <p><strong>- Ana María</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial">
+                <div class="testimonial-container">
+                    <div class="testimonial-avatar">
+                        <img src="IMAGENES/Carlos Gomez.jpg" alt="Avatar Carlos Gómez">
+                    </div>
+                    <div>
+                        <p>"El servicio es excelente y los productos son de alta calidad."</p>
+                        <p><strong>- Carlos Gómez</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial">
+                <div class="testimonial-container">
+                    <div class="testimonial-avatar">
+                        <img src="IMAGENES/Laura Perez.jpg" alt="Avatar Laura Pérez">
+                    </div>
+                    <div>
+                        <p>"Recomiendo esta tienda a todos mis amigos y familiares."</p>
+                        <p><strong>- Laura Pérez</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Mi Archivo JavaScript -->
+<script src="SCRIPT/script.js"></script>
+
+
+</body> 
+
+<!-- Footer -->
+<footer class="text-center">
+    <p>&copy; 2025 Tienda Virtual de Productos Naturales y de salud - Todos los derechos reservados | Valledupar Colombia | Hecho por Adelaida Maestre</p>
+    <div class="footer-social">
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+
+
+</html>
